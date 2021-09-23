@@ -19,6 +19,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+#define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -154,12 +155,12 @@ const char* mtar_strerror(int err) {
 
 
 static int file_write(mtar_t *tar, const void *data, unsigned size) {
-  unsigned res = fwrite(data, 1, size, tar->stream);
+  unsigned res = (unsigned int)(fwrite(data, 1, size, tar->stream));
   return (res == size) ? MTAR_ESUCCESS : MTAR_EWRITEFAIL;
 }
 
 static int file_read(mtar_t *tar, void *data, unsigned size) {
-  unsigned res = fread(data, 1, size, tar->stream);
+  unsigned res = (unsigned int)(fread(data, 1, size, tar->stream));
   return (res == size) ? MTAR_ESUCCESS : MTAR_EREADFAIL;
 }
 
